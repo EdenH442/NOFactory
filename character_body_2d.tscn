@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=3 uid="uid://c31enuft5tvdv"]
+
+[ext_resource type="Texture2D" uid="uid://dvxaujme158hn" path="res://professor_walk_cycle_no_hat.png" id="1_bd7h0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tp75g"]
+atlas = ExtResource("1_bd7h0")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kom0y"]
+atlas = ExtResource("1_bd7h0")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4r4x"]
+atlas = ExtResource("1_bd7h0")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwaro"]
+atlas = ExtResource("1_bd7h0")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ood8y"]
+atlas = ExtResource("1_bd7h0")
+region = Rect2(256, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xa2s6"]
+atlas = ExtResource("1_bd7h0")
+region = Rect2(320, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bpobk"]
+atlas = ExtResource("1_bd7h0")
+region = Rect2(384, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7htoe"]
+atlas = ExtResource("1_bd7h0")
+region = Rect2(448, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xr1e1"]
+atlas = ExtResource("1_bd7h0")
+region = Rect2(512, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kls6t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tp75g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kom0y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4r4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwaro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ood8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xa2s6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bpobk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7htoe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xr1e1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kls6t")
+frame_progress = 0.22245
