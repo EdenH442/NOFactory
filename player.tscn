@@ -34,7 +34,6 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.y = move_toward(velocity.x, 0, SPEED)
-		
 	
 	if velocity.x > 0:
 		$AnimatedSprite2D.play(\"Right\")
@@ -46,8 +45,6 @@ func _physics_process(delta):
 		$AnimatedSprite2D.play(\"Down\")
 	else:
 		$AnimatedSprite2D.stop()
-	
-	
 	
 	move_and_slide()
 "
@@ -337,7 +334,7 @@ script = SubResource("GDScript_4v7w4")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_m2ei5")
 animation = &"Down"
-frame_progress = 0.155305
+frame_progress = 0.684036
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)

@@ -1,11 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://gitt7ftqok78"]
+[gd_scene load_steps=4 format=3 uid="uid://gitt7ftqok78"]
 
-[ext_resource type="PackedScene" uid="uid://bk5kb0fmnandt" path="res://player.tscn" id="1_ftktm"]
+[ext_resource type="Texture2D" uid="uid://dcnuh217vo716" path="res://Kitchen_in_pixel_art.png" id="1_bx132"]
+[ext_resource type="PackedScene" uid="uid://ba6dmda72phi" path="res://player_1.tscn" id="2_7q6st"]
+[ext_resource type="PackedScene" uid="uid://bg14cs13jxvj3" path="res://player_2.tscn" id="3_jwcf4"]
 
 [node name="Game" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_ftktm")]
-position = Vector2(-1, -3)
-
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3.865, 3.865)
+zoom = Vector2(2, 2)
+
+[node name="KitchenInPixelArt" type="Sprite2D" parent="."]
+position = Vector2(-1, -2)
+texture = ExtResource("1_bx132")
+
+[node name="Player1" parent="." instance=ExtResource("2_7q6st")]
+
+[node name="player_2" parent="." instance=ExtResource("3_jwcf4")]
+position = Vector2(121.772, 79.1911)

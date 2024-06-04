@@ -1,0 +1,132 @@
+[gd_scene load_steps=18 format=3 uid="uid://ba6dmda72phi"]
+
+[ext_resource type="Texture2D" uid="uid://02uy04unymur" path="res://Character1M_1_wait_0.png" id="1_1861y"]
+[ext_resource type="Texture2D" uid="uid://de52eti6ks7w" path="res://Character1M_1_wait_1.png" id="2_rih4p"]
+[ext_resource type="Texture2D" uid="uid://bsmk7y0tslkn5" path="res://Character1M_1_wait_2.png" id="3_gtiqf"]
+[ext_resource type="Texture2D" uid="uid://dv2xuusgvjpx2" path="res://Character1M_1_wait_3.png" id="4_xxedy"]
+[ext_resource type="Texture2D" uid="uid://b8u52ohhdf0hj" path="res://Character1M_1_wait_4.png" id="5_otrio"]
+[ext_resource type="Texture2D" uid="uid://c4hhlto5pow51" path="res://Character1M_1_wait_5.png" id="6_i5fky"]
+[ext_resource type="Texture2D" uid="uid://cum8tew58uskr" path="res://Character1M_1_walk_0.png" id="7_xgogd"]
+[ext_resource type="Texture2D" uid="uid://mlsobuafuj5w" path="res://Character1M_1_walk_1.png" id="8_bx1hp"]
+[ext_resource type="Texture2D" uid="uid://ckmu4fqxikgtk" path="res://Character1M_1_walk_2.png" id="9_gkqmp"]
+[ext_resource type="Texture2D" uid="uid://in6ldbtrevuk" path="res://Character1M_1_walk_3.png" id="10_een7b"]
+[ext_resource type="Texture2D" uid="uid://csjxrrou8ec4a" path="res://Character1M_1_walk_4.png" id="11_jei0r"]
+[ext_resource type="Texture2D" uid="uid://c4te1ieaqolx5" path="res://Character1M_1_walk_5.png" id="12_5njne"]
+[ext_resource type="Texture2D" uid="uid://b1oi4xpfy88vd" path="res://Character1M_1_walk_6.png" id="13_bafyj"]
+[ext_resource type="Texture2D" uid="uid://dkjhrw0klk34f" path="res://Character1M_1_walk_7.png" id="14_4y0nm"]
+
+[sub_resource type="GDScript" id="GDScript_jb1p8"]
+script/source = "extends CharacterBody2D
+
+
+const SPEED = 100.0
+const JUMP_VELOCITY = -400.0
+
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting(\"physics/2d/default_gravity\")
+
+
+func _physics_process(delta):
+	# Add the gravity.
+	#if not is_on_floor():
+		#velocity.y += gravity * delta
+
+	# Handle jump.
+	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var directionHorizontal = Input.get_axis(\"ui_left\", \"ui_right\")
+	var directionVertical = Input.get_axis(\"ui_up\", \"ui_down\")
+	if directionHorizontal && !directionVertical:
+		velocity.x = directionHorizontal * SPEED
+	elif directionVertical && !directionHorizontal:
+		velocity.y = directionVertical * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.y = move_toward(velocity.x, 0, SPEED)
+	
+	if velocity.x > 0:
+		$AnimatedSprite2D.scale.x = 1
+		$AnimatedSprite2D.play(\"walk\")
+	elif velocity.x < 0:
+		$AnimatedSprite2D.scale.x = -1
+		$AnimatedSprite2D.play(\"walk\")
+	elif velocity.y < 0:
+		$AnimatedSprite2D.play(\"walk\")
+	elif velocity.y > 0:
+		$AnimatedSprite2D.play(\"walk\")
+	else:
+		$AnimatedSprite2D.play(\"wait\")
+	
+	move_and_slide()
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0p5s7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1861y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rih4p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_gtiqf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xxedy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_otrio")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_i5fky")
+}],
+"loop": true,
+"name": &"wait",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_xgogd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_bx1hp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_gkqmp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_een7b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_jei0r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_5njne")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_bafyj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_4y0nm")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 13.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4qlpc"]
+height = 36.0
+
+[node name="Player1" type="CharacterBody2D"]
+script = SubResource("GDScript_jb1p8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0p5s7")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_4qlpc")
